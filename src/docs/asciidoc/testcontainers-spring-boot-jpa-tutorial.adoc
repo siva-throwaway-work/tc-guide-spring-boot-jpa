@@ -1,0 +1,29 @@
+= Testcontainers with SpringBoot and JPA Demo
+:idprefix:
+:idseparator: -
+:icons: font
+:imagesdir: ./images
+:includes: ./_includes
+:toc: preamble
+:source-highlighter: coderay
+:nofooter: true
+:rootDir: .
+//For intellij Preview use following rootDir
+//:rootDir: ../../..
+:javaMainSourcesDir: {rootDir}/src/main/java
+:javaTestSourcesDir: {rootDir}/src/test/java
+
+This guide illustrates how to use https://www.testcontainers.org/[Testcontainers] in a SpringBoot application to test database interactions using JPA.
+
+== Entrypoint Class
+[source,java]
+----
+include::{javaMainSourcesDir}/com/sivalabs/demo/ProductController.java[lines="10..21"]
+----
+
+== Integration Test
+
+[source,java]
+----
+include::{javaTestSourcesDir}/com/sivalabs/demo/DemoApplicationTests.java[]
+----
