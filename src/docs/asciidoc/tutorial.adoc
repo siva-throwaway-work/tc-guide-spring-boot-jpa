@@ -1,0 +1,12 @@
+= Testcontainers with SpringBoot and JPA
+:idprefix:
+:idseparator: -
+:icons: font
+:imagesdir: ./images
+:includes: ./_includes
+:toc: left
+:source-highlighter: coderay
+:nofooter: true
+:rootDir: ../../..
+
+include::src/docs/asciidoc/index.adoc[]
