@@ -1,24 +1,30 @@
 name: Build
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - '**'
 jobs:
   build:
-    uses: sivaprasadreddy/reusable-github-workflows/.github/workflows/java-gradle-build-test.yml@main
-
-  build-docs:
+    name: Gradle Build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distribution: [ 'temurin' ]
+        java: [ '17']
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Java 17
+
+      - name: Setup Java ${{ matrix.java }} (${{ matrix.distribution }})
         uses: actions/setup-java@v3
         with:
-          java-version: 17
-          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+          distribution: ${{ matrix.distribution }}
           cache: 'gradle'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
       - name: Build Docs
         run: ./gradlew asciidoctor
