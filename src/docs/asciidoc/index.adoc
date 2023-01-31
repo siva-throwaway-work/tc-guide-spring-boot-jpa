@@ -1,23 +1,89 @@
-== Testcontainers with SpringBoot and JPA
-ifndef::rootDir[]
+= Testcontainers with SpringBoot and JPA
+:idprefix:
+:idseparator: -
+:icons: font
+:imagesdir: ./images
+:includes: ./_includes
+:toc: preamble
+:source-highlighter: coderay
+:nofooter: true
+//:stylesdir: src/docs/styles
+:stylesheet: overrides.css
+:linkcss:
+:copycss: overrides.css
 :rootDir: .
-endif::rootDir[]
 //For intellij Preview use following rootDir
 //:rootDir: ../../..
 :javaMainSourcesDir: {rootDir}/src/main/java
 :javaTestSourcesDir: {rootDir}/src/test/java
 
-This guide illustrates how to use https://www.testcontainers.org/[Testcontainers] in a SpringBoot application to test database interactions using JPA.
+This quick starter will guide you to configure and use https://www.testcontainers.org/[Testcontainers] in a SpringBoot project.
 
-=== Application Entrypoint Class
+In this guide, we'll look at a sample Spring Boot application that uses Testcontainers for running unit tests with real dependencies.
+The implementation uses a relational database for storing data. We'll look at the necessary parts of the code that integrates Testcontainers into the app.
+
+After the quick start, you'll have a working Spring Boot app with Testcontainers-based tests,
+and will be ready to explore integrations with other databases and other technologies via Testcontainers.
+
+== Setup Environment
+Make sure you have Java 8+ and a https://www.testcontainers.org/supported_docker_environment/[compatible Docker environment] installed.
+If you are going to use Maven build tool then make sure Java 17+ is installed.
+
+For example:
+
+[source,shell]
+----
+$ java -version
+openjdk version "17.0.4" 2022-07-19
+OpenJDK Runtime Environment Temurin-17.0.4+8 (build 17.0.4+8)
+OpenJDK 64-Bit Server VM Temurin-17.0.4+8 (build 17.0.4+8, mixed mode, sharing)
+
+$ docker version
+...
+Server: Docker Desktop 4.12.0 (85629)
+ Engine:
+  Version:          20.10.17
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.17.11
+...
+----
+
+== Add Testcontainers Dependencies
+Following are the Testcontainers and RestAssured dependencies:
+
+[source,groovy]
+----
+ext {
+    set('testcontainersVersion', "1.17.6")
+}
+
+dependencies {
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
+}
+----
+
+
+== Application Entrypoint Class
 [source,java]
 ----
 include::{javaMainSourcesDir}/com/sivalabs/demo/ProductController.java[lines="10..21"]
 ----
 
-=== Integration Test
+== Integration Test
 
 [source,java]
 ----
 include::{javaTestSourcesDir}/com/sivalabs/demo/DemoApplicationTests.java[]
 ----
+
+== Conclusion
+Testcontainers enable using the real dependency services like SQL databases, NoSQL datastores, message brokers or any containerized services for that matter.
+This approach allows you to create reliable test suites improving confidence in your code.
