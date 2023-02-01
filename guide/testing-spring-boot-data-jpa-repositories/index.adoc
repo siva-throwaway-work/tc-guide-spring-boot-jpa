@@ -1,21 +1,9 @@
-= Testcontainers with SpringBoot and JPA
-:idprefix:
-:idseparator: -
-:icons: font
-:imagesdir: ./images
-:includes: ./_includes
-:toc: preamble
-:source-highlighter: coderay
-:nofooter: true
-//:stylesdir: src/docs/styles
-:stylesheet: overrides.css
-:linkcss:
-:copycss: overrides.css
-:rootDir: .
-//For intellij Preview use following rootDir
-//:rootDir: ../../..
-:javaMainSourcesDir: {rootDir}/src/main/java
-:javaTestSourcesDir: {rootDir}/src/test/java
+---
+title: "Testing Spring Data Jpa Repositories using Testcontainers"
+date: 2023-01-21T09:39:58+05:30
+draft: false
+---
+:codebase: https://raw.githubusercontent.com/siva-throwaway-work/tc-guide-spring-boot-jpa/main
 
 This quick starter will guide you to configure and use https://www.testcontainers.org/[Testcontainers] in a SpringBoot project.
 
@@ -70,24 +58,17 @@ dependencyManagement {
 }
 ----
 
-For Maven
-
-[source,xml]
-----
-include::https://raw.githubusercontent.com/sivaprasadreddy/spring-boot-jpa-crud-demo/main/pom.xml[]
-----
-
 == Application Entrypoint Class
 [source,java]
 ----
-include::{javaMainSourcesDir}/com/sivalabs/demo/ProductController.java[lines="10..21"]
+include::{codebase}/src/main/java/com/sivalabs/demo/ProductController.java[lines="10..21"]
 ----
 
 == Integration Test
 
 [source,java]
 ----
-include::{javaTestSourcesDir}/com/sivalabs/demo/DemoApplicationTests.java[]
+include::{codebase}/src/test/java/com/sivalabs/demo/DemoApplicationTests.java[]
 ----
 
 == Conclusion

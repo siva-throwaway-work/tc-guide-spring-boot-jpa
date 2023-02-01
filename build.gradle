@@ -67,5 +67,6 @@ asciidoctorj {
     options doctype: "book",
             ruby: "erubis"
 
-    attributes "project-version": "$project.version"
+
+    attributes "project-version": "$project.version", "allow-uri-read": ""
 }
